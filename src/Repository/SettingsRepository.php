@@ -37,8 +37,8 @@ final class SettingsRepository
         try {
             $connection = $this->db->connection();
             $statement = $connection->prepare(
-                \"INSERT INTO settings (name, value_int) VALUES ('distance_max_km', :value)\"
-                . \" ON DUPLICATE KEY UPDATE value_int = VALUES(value_int)\"
+                "INSERT INTO settings (name, value_int) VALUES ('distance_max_km', :value)"
+                . " ON DUPLICATE KEY UPDATE value_int = VALUES(value_int)"
             );
             $statement->execute(['value' => $distance]);
         } catch (PDOException $exception) {
