@@ -14,6 +14,7 @@
 </head>
 <body>
     <h1>Restaurants proches</h1>
+    <p><a href="/restaurant/login">Espace restaurant</a> · <a href="/admin/login">Administration</a></p>
     <p>Distance maximale avant “trop loin” : <strong><?= htmlspecialchars((string) $distanceMaxKm) ?> km</strong>.</p>
 
     <?php if (empty($restaurants)) : ?>

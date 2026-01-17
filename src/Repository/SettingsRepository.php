@@ -29,4 +29,19 @@ final class SettingsRepository
             return $this->config->distanceMaxKm;
         }
     }
+
+    public function updateDistanceMaxKm(int $distance): void
+    {
+        $distance = max(1, $distance);
+
+        try {
+            $connection = $this->db->connection();
+            $statement = $connection->prepare(
+                \"INSERT INTO settings (name, value_int) VALUES ('distance_max_km', :value)\"
+                . \" ON DUPLICATE KEY UPDATE value_int = VALUES(value_int)\"
+            );
+            $statement->execute(['value' => $distance]);
+        } catch (PDOException $exception) {
+        }
+    }
 }

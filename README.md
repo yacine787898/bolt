@@ -22,3 +22,4 @@ DB_HOST=127.0.0.1 DB_NAME=bolt DB_USER=bolt DB_PASSWORD=secret php -S 0.0.0.0:80
 ## Documentation
 - Spécifications fonctionnelles : [`docs/requirements.md`](docs/requirements.md)
 - Questions ouvertes : [`docs/open-questions.md`](docs/open-questions.md)
+- Manuel d'utilisation : [`docs/manual.md`](docs/manual.md)
