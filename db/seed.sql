@@ -1,23 +1,64 @@
-INSERT INTO settings (name, value_int)
-VALUES ('distance_max_km', 20);
+INSERT INTO products (name, slug, description, price, image_url, is_active) VALUES
+('Matcha Cérémonial Uji', 'matcha-ceremonial-uji', 'Poudre de matcha premium, récolte de printemps, idéale pour les cérémonies et les lattes onctueux.', 3200, 'https://images.unsplash.com/photo-1515825838458-f2a94b20105a?auto=format&fit=crop&w=900&q=80', 1),
+('Matcha Latte Vanille', 'matcha-latte-vanille', 'Mélange instantané matcha + vanille naturelle pour un latte doux et équilibré.', 1800, 'https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=900&q=80', 1),
+('Kit Ritual Matcha', 'kit-ritual-matcha', 'Bol, fouet chasen et cuillère bambou pour préparer votre matcha maison.', 4500, 'https://images.unsplash.com/photo-1505576391880-b3f9d713dc4f?auto=format&fit=crop&w=900&q=80', 1);
 
-INSERT INTO restaurants (name, email, menu_url, clicks, is_validated, distance_km)
-VALUES
-    ('Pizza Nova', 'contact@pizzanova.test', 'https://example.com/pizzanova', 120, 1, 4.5),
-    ('Sushi Zen', 'bonjour@sushizen.test', 'https://example.com/sushizen', 76, 1, 18.0),
-    ('Burger Time', 'hello@burgertime.test', 'https://example.com/burgertime', 30, 0, 24.0);
-
-INSERT INTO users (restaurant_id, name, email, password_hash, role)
-VALUES
-    (NULL, 'Admin', 'admin@bolt.test', '$2y$12$W19n3boP4Bb009ikhiG.N.JIbR2E7VW9udnUONDztzB8GN56V95o6', 'admin'),
-    (1, 'Pizza Nova', 'resto@pizzanova.test', '$2y$12$tP/F6xlV6gORLXZrvaXZ8.8UiKByS8C1qwLbRa5DQnXFXdB7.tjuK', 'restaurant');
-
-INSERT INTO orders (restaurant_id, customer_name, customer_phone, customer_address, customer_ip, status)
-VALUES
-    (1, 'Marie Dupont', '+33 6 12 34 56 78', '12 rue des Lilas, Paris', '203.0.113.10', 'pending'),
-    (1, 'Lucas Martin', '+33 6 98 76 54 32', '48 avenue Victor Hugo, Paris', '203.0.113.11', 'confirmed');
-
-INSERT INTO order_items (order_id, item_name, quantity, unit_price, options, supplements)
-VALUES
-    (1, 'Pizza Margherita', 1, 12.50, 'Taille L', 'Olives'),
-    (2, 'Pizza Regina', 2, 14.00, 'Taille M', 'Extra fromage');
+INSERT INTO wilayas (id, name, domicile_price, stopdesk_price, cancel_price) VALUES
+(1, 'Adrar', 1400, 970, 200),
+(2, 'Chlef', 750, 520, 200),
+(3, 'Laghouat', 950, 670, 200),
+(4, 'Oum El Bouaghi', 800, 520, 200),
+(5, 'Batna', 800, 520, 200),
+(6, 'Bejaia', 800, 520, 200),
+(7, 'Biskra', 950, 670, 200),
+(8, 'Bechar', 1050, 720, 200),
+(9, 'Blida', 750, 520, 200),
+(10, 'Bouira', 800, 520, 200),
+(11, 'Tamanrasset', 1600, 1120, 250),
+(12, 'Tebessa', 850, 520, 200),
+(13, 'Tlemcen', 700, 520, 200),
+(14, 'Tiaret', 750, 520, 200),
+(15, 'Tizi Ouzou', 800, 520, 200),
+(16, 'Alger', 650, 470, 200),
+(17, 'Djelfa', 950, 670, 200),
+(18, 'Jijel', 800, 520, 200),
+(19, 'Sétif', 800, 520, 200),
+(20, 'Saida', 750, 570, 200),
+(21, 'Skikda', 800, 520, 200),
+(22, 'Sidi Bel Abbès', 700, 520, 200),
+(23, 'Annaba', 850, 520, 200),
+(24, 'Guelma', 850, 520, 200),
+(25, 'Constantine', 800, 520, 200),
+(26, 'Medea', 750, 520, 200),
+(27, 'Mostaganem', 700, 520, 200),
+(28, 'M''Sila', 900, 570, 200),
+(29, 'Mascara', 700, 520, 200),
+(30, 'Ouargla', 950, 720, 200),
+(31, 'Oran', 400, 370, 200),
+(32, 'El Bayadh', 1000, 670, 200),
+(33, 'Illizi', 0, 0, 0),
+(34, 'Bordj Bou Arreridj', 800, 520, 200),
+(35, 'Boumerdes', 800, 520, 200),
+(36, 'El Tarf', 850, 520, 200),
+(37, 'Tindouf', 0, 0, 0),
+(38, 'Tissemsilt', 750, 520, 200),
+(39, 'El Oued', 950, 720, 200),
+(40, 'Khenchela', 800, 0, 200),
+(41, 'Souk Ahras', 800, 520, 200),
+(42, 'Tipaza', 800, 520, 200),
+(43, 'Mila', 800, 520, 200),
+(44, 'Ain Defla', 750, 520, 200),
+(45, 'Naama', 1000, 670, 200),
+(46, 'Ain Temouchent', 650, 520, 200),
+(47, 'Ghardaia', 950, 670, 200),
+(48, 'Relizane', 750, 520, 200),
+(49, 'Timimoun', 1400, 0, 200),
+(50, 'Bordj Badji Mokhtar', 0, 0, 0),
+(51, 'Ouled Djellal', 950, 670, 200),
+(52, 'Béni Abbès', 1050, 970, 200),
+(53, 'In Salah', 1600, 0, 250),
+(54, 'In Guezzam', 1600, 0, 250),
+(55, 'Touggourt', 950, 720, 200),
+(56, 'Djanet', 0, 0, 0),
+(57, 'M''Ghair', 950, 0, 200),
+(58, 'Meniaa', 950, 0, 200);

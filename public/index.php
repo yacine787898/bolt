@@ -7,13 +7,12 @@ require __DIR__ . '/../src/Database.php';
 require __DIR__ . '/../src/Router.php';
 require __DIR__ . '/../src/Auth.php';
 require __DIR__ . '/../src/Controller/BaseController.php';
-require __DIR__ . '/../src/Controller/ClientController.php';
-require __DIR__ . '/../src/Controller/RestaurantController.php';
+require __DIR__ . '/../src/Controller/StoreController.php';
 require __DIR__ . '/../src/Controller/AdminController.php';
-require __DIR__ . '/../src/Repository/SettingsRepository.php';
-require __DIR__ . '/../src/Repository/RestaurantRepository.php';
-require __DIR__ . '/../src/Repository/UserRepository.php';
+require __DIR__ . '/../src/Repository/ProductRepository.php';
 require __DIR__ . '/../src/Repository/OrderRepository.php';
+require __DIR__ . '/../src/Repository/WilayaRepository.php';
+require __DIR__ . '/../src/Service/ShippingService.php';
 
 session_start();
 
@@ -22,28 +21,43 @@ $db = new Database($config);
 $router = new Router();
 
 $router->get('/', function () use ($db, $config): void {
-    $controller = new ClientController($db, $config);
+    $controller = new StoreController($db, $config);
     $controller->index();
 });
 
-$router->get('/restaurant', function () use ($db, $config): void {
-    $controller = new RestaurantController($db, $config);
-    $controller->dashboard();
+$router->get('/produit/{slug}', function (array $params) use ($db, $config): void {
+    $controller = new StoreController($db, $config);
+    $controller->showProduct($params);
 });
 
-$router->get('/restaurant/login', function () use ($db, $config): void {
-    $controller = new RestaurantController($db, $config);
-    $controller->showLogin();
+$router->get('/cart', function () use ($db, $config): void {
+    $controller = new StoreController($db, $config);
+    $controller->showCart();
 });
 
-$router->post('/restaurant/login', function () use ($db, $config): void {
-    $controller = new RestaurantController($db, $config);
-    $controller->login();
+$router->post('/cart/add', function () use ($db, $config): void {
+    $controller = new StoreController($db, $config);
+    $controller->addToCart();
 });
 
-$router->post('/restaurant/orders/status', function () use ($db, $config): void {
-    $controller = new RestaurantController($db, $config);
-    $controller->updateOrderStatus();
+$router->post('/cart/update', function () use ($db, $config): void {
+    $controller = new StoreController($db, $config);
+    $controller->updateCart();
+});
+
+$router->get('/checkout', function () use ($db, $config): void {
+    $controller = new StoreController($db, $config);
+    $controller->showCheckout();
+});
+
+$router->post('/checkout', function () use ($db, $config): void {
+    $controller = new StoreController($db, $config);
+    $controller->placeOrder();
+});
+
+$router->get('/order-success', function () use ($db, $config): void {
+    $controller = new StoreController($db, $config);
+    $controller->showOrderSuccess();
 });
 
 $router->get('/admin', function () use ($db, $config): void {
@@ -61,35 +75,29 @@ $router->post('/admin/login', function () use ($db, $config): void {
     $controller->login();
 });
 
-$router->post('/admin/settings/distance', function () use ($db, $config): void {
+$router->get('/admin/logout', function () use ($db, $config): void {
     $controller = new AdminController($db, $config);
-    $controller->updateDistance();
+    $controller->logout();
 });
 
-$router->get('/admin/restaurants/toggle', function () use ($db, $config): void {
+$router->post('/admin/products/save', function () use ($db, $config): void {
     $controller = new AdminController($db, $config);
-    $controller->toggleRestaurantValidation();
+    $controller->saveProduct();
 });
 
-$router->get('/admin/restaurants/delete', function () use ($db, $config): void {
+$router->post('/admin/products/delete', function () use ($db, $config): void {
     $controller = new AdminController($db, $config);
-    $controller->deleteRestaurant();
+    $controller->deleteProduct();
 });
 
-$router->get('/admin/impersonate', function () use ($db, $config): void {
+$router->post('/admin/orders/status', function () use ($db, $config): void {
     $controller = new AdminController($db, $config);
-    $controller->impersonate();
+    $controller->updateOrderStatus();
 });
 
-$router->get('/admin/stop-impersonation', function () use ($db, $config): void {
+$router->post('/admin/orders/send', function () use ($db, $config): void {
     $controller = new AdminController($db, $config);
-    $controller->stopImpersonation();
-});
-
-$router->get('/logout', function (): void {
-    Auth::logout();
-    header('Location: /');
-    exit;
+    $controller->sendOrder();
 });
 
 $router->dispatch($_SERVER['REQUEST_METHOD'] ?? 'GET', $_SERVER['REQUEST_URI'] ?? '/');
