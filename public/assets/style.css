@@ -8,6 +8,9 @@
   --muted: #6b7280;
   --border: #e2e8f0;
   --warning: #f97316;
+  --shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+  --glow: 0 20px 60px rgba(59, 130, 246, 0.22);
+  --gradient: linear-gradient(120deg, #eff6ff, #fdf2f8 50%, #ecfeff);
 }
 
 * {
@@ -19,6 +22,7 @@ body {
   font-family: "Inter", "Segoe UI", sans-serif;
   background: var(--bg);
   color: var(--secondary);
+  min-height: 100vh;
 }
 
 a {
@@ -43,6 +47,7 @@ header {
   z-index: 50;
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
+  transition: box-shadow 0.3s ease;
 }
 
 .navbar {
@@ -58,6 +63,9 @@ header {
   font-weight: 700;
   color: var(--primary);
   letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav-actions {
@@ -74,7 +82,7 @@ header {
   border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .button.secondary {
@@ -97,6 +105,11 @@ header {
   box-shadow: 0 6px 18px rgba(37, 99, 235, 0.18);
 }
 
+.button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
 .hero {
   padding: 3.5rem 0 2rem;
 }
@@ -104,6 +117,7 @@ header {
 .hero h1 {
   font-size: clamp(2rem, 4vw, 3.5rem);
   margin-bottom: 1rem;
+  letter-spacing: -0.02em;
 }
 
 .hero p {
@@ -114,12 +128,15 @@ header {
 
 .hero-card {
   margin-top: 2rem;
-  background: linear-gradient(120deg, #eff6ff, #fff);
+  background: var(--gradient);
   border-radius: 24px;
   padding: 2rem;
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
 }
 
 .hero-card div {
@@ -127,6 +144,12 @@ header {
   border-radius: 18px;
   padding: 1rem;
   border: 1px solid var(--border);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.hero-card div:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glow);
 }
 
 .section-title {
@@ -147,6 +170,13 @@ header {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--glow);
 }
 
 .product-card .content {
@@ -155,6 +185,14 @@ header {
   flex-direction: column;
   gap: 0.6rem;
   flex: 1;
+}
+
+.product-card img {
+  transition: transform 0.35s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.03);
 }
 
 .product-card h3 {
@@ -256,6 +294,7 @@ header {
   padding: 0.85rem 1rem;
   background: white;
   margin-bottom: 0.8rem;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 .question-item button {
@@ -266,6 +305,7 @@ header {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
 .question-answer {
@@ -276,6 +316,11 @@ header {
 
 .question-item.active .question-answer {
   display: block;
+}
+
+.question-item.active {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: var(--glow);
 }
 
 .question-video {
@@ -297,6 +342,7 @@ header {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
+  box-shadow: var(--shadow);
 }
 
 .socials {
@@ -313,6 +359,12 @@ header {
   display: grid;
   place-items: center;
   background: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.socials a:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--glow);
 }
 
 footer {
@@ -344,6 +396,17 @@ footer {
   max-height: 90vh;
   overflow-y: auto;
   position: relative;
+  animation: modalIn 0.25s ease;
+  box-shadow: var(--shadow);
+}
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.5);
+  border-radius: 999px;
 }
 
 .modal-close {
@@ -382,6 +445,7 @@ footer {
   border-radius: 18px;
   border: 1px solid var(--border);
   padding: 1.2rem;
+  box-shadow: var(--shadow);
 }
 
 .admin-card h2 {
@@ -402,6 +466,15 @@ select {
   border-radius: 10px;
   border: 1px solid var(--border);
   font-family: inherit;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.6);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 textarea {
@@ -444,6 +517,7 @@ textarea {
   border-radius: 12px;
   border: 1px solid #bae6fd;
   margin: 1rem 0;
+  box-shadow: var(--shadow);
 }
 
 .cart-summary {
@@ -470,5 +544,16 @@ textarea {
 
   .modal-content {
     padding: 1rem;
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }
