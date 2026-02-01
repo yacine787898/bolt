@@ -90,6 +90,19 @@ function getCartCount(array $cart): int
 
 $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
+$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
+$basePath = $basePath === '/' ? '' : $basePath;
+
+function withBasePath(string $path, string $basePath): string
+{
+    if ($path === '') {
+        return $basePath !== '' ? $basePath : '/';
+    }
+    if (str_starts_with($path, '/')) {
+        return $basePath . $path;
+    }
+    return $basePath . '/' . $path;
+}
 
 $products = loadJson(PRODUCTS_FILE, []);
 $orders = loadJson(ORDERS_FILE, []);
@@ -102,7 +115,7 @@ usort($products, static function (array $a, array $b): int {
 
 $cart = getCart();
 
-if ($path === '/cart/add' && $method === 'POST') {
+if ($path === $basePath . '/cart/add' && $method === 'POST') {
     $productId = (int) ($_POST['product_id'] ?? 0);
     $qty = (int) ($_POST['qty'] ?? 0);
     $options = $_POST['options'] ?? [];
@@ -136,7 +149,7 @@ if ($path === '/cart/add' && $method === 'POST') {
     exit;
 }
 
-if ($path === '/cart/remove' && $method === 'POST') {
+if ($path === $basePath . '/cart/remove' && $method === 'POST') {
     $productId = (int) ($_POST['product_id'] ?? 0);
     unset($cart[$productId]);
     saveCart($cart);
@@ -144,7 +157,7 @@ if ($path === '/cart/remove' && $method === 'POST') {
     exit;
 }
 
-if ($path === '/checkout' && $method === 'POST') {
+if ($path === $basePath . '/checkout' && $method === 'POST') {
     $quantities = $_POST['cart_qty'] ?? [];
     $updatedCart = [];
 
@@ -188,7 +201,7 @@ if ($path === '/checkout' && $method === 'POST') {
 
     if (empty($cart) || !$selectedWilaya) {
         setFlash('error', 'Votre panier est vide ou la wilaya est invalide.');
-        header('Location: /');
+        header('Location: ' . withBasePath('/', $basePath));
         exit;
     }
 
@@ -238,32 +251,32 @@ if ($path === '/checkout' && $method === 'POST') {
     saveJson(ORDERS_FILE, $orders);
     saveCart([]);
     setFlash('success', 'Merci ! Votre commande a été envoyée.');
-    header('Location: /');
+    header('Location: ' . withBasePath('/', $basePath));
     exit;
 }
 
-if ($path === '/admin/login' && $method === 'POST') {
+if ($path === $basePath . '/admin/login' && $method === 'POST') {
     $password = sanitizeText((string) ($_POST['password'] ?? ''));
     if (password_verify($password, ADMIN_PASSWORD_HASH)) {
         $_SESSION['admin_logged_in'] = true;
-        header('Location: /admin');
+        header('Location: ' . withBasePath('/admin', $basePath));
         exit;
     }
 
     setFlash('error', 'Mot de passe incorrect.');
-    header('Location: /admin');
+    header('Location: ' . withBasePath('/admin', $basePath));
     exit;
 }
 
-if ($path === '/admin/logout') {
+if ($path === $basePath . '/admin/logout') {
     unset($_SESSION['admin_logged_in']);
-    header('Location: /');
+    header('Location: ' . withBasePath('/', $basePath));
     exit;
 }
 
-if ($path === '/admin' && $method === 'POST') {
+if ($path === $basePath . '/admin' && $method === 'POST') {
     if (empty($_SESSION['admin_logged_in'])) {
-        header('Location: /admin');
+        header('Location: ' . withBasePath('/admin', $basePath));
         exit;
     }
 
@@ -392,11 +405,11 @@ if ($path === '/admin' && $method === 'POST') {
         saveJson(QUESTIONS_FILE, $questions);
     }
 
-    header('Location: /admin');
+    header('Location: ' . withBasePath('/admin', $basePath));
     exit;
 }
 
-function renderHeader(string $title, int $cartCount): void
+function renderHeader(string $title, int $cartCount, string $basePath): void
 {
     echo "<!doctype html>\n";
     echo "<html lang=\"fr\">\n";
@@ -404,24 +417,24 @@ function renderHeader(string $title, int $cartCount): void
     echo "<meta charset=\"utf-8\">\n";
     echo "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n";
     echo "<title>" . e($title) . "</title>\n";
-    echo "<link rel=\"stylesheet\" href=\"/assets/style.css\">\n";
+    echo "<link rel=\"stylesheet\" href=\"" . e(withBasePath('/assets/style.css', $basePath)) . "\">\n";
     echo "</head>\n";
     echo "<body>\n";
     echo "<header>\n";
     echo "<div class=\"container navbar\">\n";
-    echo "<a class=\"logo\" href=\"/\">meneetocom</a>\n";
+    echo "<a class=\"logo\" href=\"" . e(withBasePath('/', $basePath)) . "\">meneetocom</a>\n";
     echo "<div class=\"nav-actions\">\n";
     echo "<button class=\"button ghost\" data-open-modal=\"cart\">Panier (<span data-cart-count>" . $cartCount . "</span>)</button>\n";
-    echo "<a class=\"button\" href=\"/#produits\">Voir les produits</a>\n";
+    echo "<a class=\"button\" href=\"" . e(withBasePath('/#produits', $basePath)) . "\">Voir les produits</a>\n";
     echo "</div>\n";
     echo "</div>\n";
     echo "</header>\n";
 }
 
-function renderFooter(): void
+function renderFooter(string $basePath): void
 {
     echo "<footer>meneetocom - Cartes & Tags NFC dynamiques</footer>\n";
-    echo "<script src=\"/assets/app.js\"></script>\n";
+    echo "<script src=\"" . e(withBasePath('/assets/app.js', $basePath)) . "\"></script>\n";
     echo "</body>\n</html>";
 }
 
@@ -489,7 +502,7 @@ function buildCartItems(array $cart, array $products): array
     return [$items, $subtotal];
 }
 
-function renderCartModal(array $cartItems, int $subtotal, array $wilayas): void
+function renderCartModal(array $cartItems, int $subtotal, array $wilayas, string $basePath): void
 {
     $defaultWilaya = $wilayas[0] ?? ['Domicile' => 0, 'Stopdesk' => 0, 'IDWilaya' => 0];
     echo "<div class=\"modal\" data-modal=\"cart\">\n";
@@ -499,7 +512,7 @@ function renderCartModal(array $cartItems, int $subtotal, array $wilayas): void
     if (empty($cartItems)) {
         echo "      <p>Votre panier est vide pour le moment.</p>\n";
     } else {
-        echo "      <form method=\"post\" action=\"/checkout\">\n";
+        echo "      <form method=\"post\" action=\"" . e(withBasePath('/checkout', $basePath)) . "\">\n";
         echo "        <table class=\"cart-table\">\n";
         echo "          <thead>\n";
         echo "            <tr>\n";
@@ -537,7 +550,7 @@ function renderCartModal(array $cartItems, int $subtotal, array $wilayas): void
             echo "                <button\n";
             echo "                  class=\"button ghost small\"\n";
             echo "                  type=\"submit\"\n";
-            echo "                  formaction=\"/cart/remove\"\n";
+            echo "                  formaction=\"" . e(withBasePath('/cart/remove', $basePath)) . "\"\n";
             echo "                  formmethod=\"post\"\n";
             echo "                  name=\"product_id\"\n";
             echo "                  value=\"" . e((string) $item['product']['id']) . "\"\n";
@@ -602,9 +615,9 @@ function renderCartModal(array $cartItems, int $subtotal, array $wilayas): void
     echo "</div>\n";
 }
 
-if ($path === '/admin') {
+if ($path === $basePath . '/admin') {
     $cartCount = getCartCount($cart);
-    renderHeader('Admin - meneetocom', $cartCount);
+    renderHeader('Admin - meneetocom', $cartCount, $basePath);
 
     if (empty($_SESSION['admin_logged_in'])) {
         $error = getFlash('error');
@@ -614,14 +627,14 @@ if ($path === '/admin') {
         }
         echo "<div class=\"admin-card\" style=\"max-width:420px;margin:0 auto\">\n";
         echo "<h2>Connexion admin</h2>\n";
-        echo "<form method=\"post\" action=\"/admin/login\">\n";
+        echo "<form method=\"post\" action=\"" . e(withBasePath('/admin/login', $basePath)) . "\">\n";
         echo "<label>Mot de passe</label>\n";
         echo "<input type=\"password\" name=\"password\" required>\n";
         echo "<button class=\"button\" type=\"submit\" style=\"margin-top:1rem\">Se connecter</button>\n";
         echo "</form>\n";
         echo "</div>\n";
         echo "</main>\n";
-        renderFooter();
+        renderFooter($basePath);
         exit;
     }
 
@@ -634,7 +647,7 @@ if ($path === '/admin') {
     echo "<div class=\"admin-card\">\n";
     echo "<div style=\"display:flex;justify-content:space-between;align-items:center;\">\n";
     echo "<h2>Commandes</h2>\n";
-    echo "<a class=\"button ghost small\" href=\"/admin/logout\">Déconnexion</a>\n";
+    echo "<a class=\"button ghost small\" href=\"" . e(withBasePath('/admin/logout', $basePath)) . "\">Déconnexion</a>\n";
     echo "</div>\n";
     echo "<table class=\"admin-table\">\n";
     echo "<thead><tr><th>Date</th><th>#</th><th>Statut</th><th>Actions</th></tr></thead>\n";
@@ -787,12 +800,12 @@ if ($path === '/admin') {
     echo "</script>\n";
 
     [$cartItems, $subtotal] = buildCartItems($cart, $products);
-    renderCartModal($cartItems, $subtotal, $wilayas);
-    renderFooter();
+    renderCartModal($cartItems, $subtotal, $wilayas, $basePath);
+    renderFooter($basePath);
     exit;
 }
 
-if ($path === '/product') {
+if ($path === $basePath . '/product') {
     $slug = sanitizeText((string) ($_GET['slug'] ?? ''));
     $product = null;
     foreach ($products as $item) {
@@ -802,15 +815,15 @@ if ($path === '/product') {
         }
     }
     if (!$product) {
-        header('Location: /');
+        header('Location: ' . withBasePath('/', $basePath));
         exit;
     }
 
     $cartCount = getCartCount($cart);
-    renderHeader($product['title'] . ' - meneetocom', $cartCount);
+    renderHeader($product['title'] . ' - meneetocom', $cartCount, $basePath);
 
     echo "<main class=\"container\" style=\"padding:2rem 0\">\n";
-    echo "<a href=\"/\" class=\"badge\">← Retour</a>\n";
+    echo "<a href=\"" . e(withBasePath('/', $basePath)) . "\" class=\"badge\">← Retour</a>\n";
     echo "<div class=\"product-page\">\n";
     echo "<div class=\"gallery\">\n";
     echo "<img src=\"" . e($product['images'][0] ?? 'https://placehold.co/900x600') . "\" alt=\"" . e($product['title']) . "\">\n";
@@ -827,7 +840,7 @@ if ($path === '/product') {
     echo "<h1>" . e($product['title']) . "</h1>\n";
     echo "<p style=\"color:var(--muted)\">" . e($product['description']) . "</p>\n";
     echo "<p class=\"price\">" . e((string) $product['price']) . " DZD</p>\n";
-    echo "<form method=\"post\" action=\"/cart/add\">\n";
+    echo "<form method=\"post\" action=\"" . e(withBasePath('/cart/add', $basePath)) . "\">\n";
     echo "<input type=\"hidden\" name=\"product_id\" value=\"" . e((string) $product['id']) . "\">\n";
     if (!empty($product['options'])) {
         echo "<div class=\"options\">\n";
@@ -859,13 +872,13 @@ if ($path === '/product') {
 
     echo "</main>\n";
     [$cartItems, $subtotal] = buildCartItems($cart, $products);
-    renderCartModal($cartItems, $subtotal, $wilayas);
-    renderFooter();
+    renderCartModal($cartItems, $subtotal, $wilayas, $basePath);
+    renderFooter($basePath);
     exit;
 }
 
 $cartCount = getCartCount($cart);
-renderHeader('meneetocom - Boutique NFC', $cartCount);
+renderHeader('meneetocom - Boutique NFC', $cartCount, $basePath);
 
 $flashSuccess = getFlash('success');
 $flashError = getFlash('error');
@@ -919,8 +932,8 @@ usort($products, static function (array $a, array $b): int {
             <p><?php echo e($product['description']); ?></p>
             <div class="price"><?php echo e((string) $product['price']); ?> DZD</div>
             <div class="card-actions">
-              <a class="button ghost" href="/product?slug=<?php echo e($product['slug']); ?>">Voir</a>
-              <form method="post" action="/cart/add">
+                <a class="button ghost" href="<?php echo e(withBasePath('/product', $basePath)); ?>?slug=<?php echo e($product['slug']); ?>">Voir</a>
+              <form method="post" action="<?php echo e(withBasePath('/cart/add', $basePath)); ?>">
                 <input type="hidden" name="product_id" value="<?php echo e((string) $product['id']); ?>">
                 <input type="hidden" name="qty" value="<?php echo e((string) $product['min_qty']); ?>">
                 <button class="button" type="submit">Ajouter</button>
@@ -936,6 +949,6 @@ usort($products, static function (array $a, array $b): int {
   <?php renderAboutUs(); ?>
 </main>
 
-<?php renderCartModal($cartItems, $subtotal, $wilayas); ?>
+<?php renderCartModal($cartItems, $subtotal, $wilayas, $basePath); ?>
 
-<?php renderFooter(); ?>
+<?php renderFooter($basePath); ?>
