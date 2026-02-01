@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "question": "Comment programmer une carte NFC ?",
+    "answer": "Nous livrons chaque carte préconfigurée. Vous pouvez ensuite modifier le lien à distance depuis votre espace client.",
+    "instagram_url": ""
+  },
+  {
+    "id": 2,
+    "question": "Puis-je changer le design après commande ?",
+    "answer": "Oui, il suffit de nous envoyer le visuel avant la production. Pour les grosses quantités, un aperçu est validé avant impression.",
+    "instagram_url": ""
+  },
+  {
+    "id": 3,
+    "question": "Quels téléphones sont compatibles ?",
+    "answer": "Tous les smartphones récents avec NFC (Android et iPhone) peuvent lire nos tags et cartes.",
+    "instagram_url": "https://www.instagram.com/p/C9tG1lYI8G_/embed"
+  }
+]

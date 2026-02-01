@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "title": "Carte NFC Dynamique",
+    "slug": "carte-nfc-dynamique",
+    "description": "Carte NFC élégante et simple à programmer. Compatible iOS/Android et modifiable à distance.",
+    "price": 1200,
+    "min_qty": 5,
+    "order": 1,
+    "images": [
+      "https://placehold.co/900x600?text=Carte+NFC",
+      "https://placehold.co/900x600?text=Profil+NFC"
+    ],
+    "options": [
+      {
+        "name": "Finition",
+        "values": ["Mat", "Brillant"]
+      },
+      {
+        "name": "Type d'impression",
+        "values": ["Recto", "Recto/Verso"]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Tag NFC Dynamique",
+    "slug": "tag-nfc-dynamique",
+    "description": "Tag NFC discret et robuste pour vitrines, bureaux ou emballages. Programmable et reprogrammable à distance.",
+    "price": 900,
+    "min_qty": 10,
+    "order": 2,
+    "images": [
+      "https://placehold.co/900x600?text=Tag+NFC",
+      "https://placehold.co/900x600?text=Application"
+    ],
+    "options": [
+      {
+        "name": "Diamètre",
+        "values": ["25mm", "30mm", "35mm"]
+      }
+    ]
+  }
+]
