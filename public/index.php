@@ -92,13 +92,7 @@ $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
 $basePath = $basePath === '/' ? '' : $basePath;
-$documentRoot = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT'] ?? '');
-$publicDir = str_replace('\\', '/', __DIR__);
-$publicUrlPath = '';
-if ($documentRoot !== '' && str_starts_with($publicDir, $documentRoot)) {
-    $publicUrlPath = rtrim(substr($publicDir, strlen($documentRoot)), '/');
-}
-$assetBasePath = $publicUrlPath !== '' ? $publicUrlPath : $basePath;
+$assetBasePath = $basePath;
 
 function withBasePath(string $path, string $basePath): string
 {
