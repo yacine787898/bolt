@@ -92,6 +92,13 @@ $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/';
 $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '')), '/');
 $basePath = $basePath === '/' ? '' : $basePath;
+$documentRoot = str_replace('\\', '/', $_SERVER['DOCUMENT_ROOT'] ?? '');
+$publicDir = str_replace('\\', '/', __DIR__);
+$publicUrlPath = '';
+if ($documentRoot !== '' && str_starts_with($publicDir, $documentRoot)) {
+    $publicUrlPath = rtrim(substr($publicDir, strlen($documentRoot)), '/');
+}
+$assetBasePath = $publicUrlPath !== '' ? $publicUrlPath : $basePath;
 
 function withBasePath(string $path, string $basePath): string
 {
@@ -409,7 +416,7 @@ if ($path === $basePath . '/admin' && $method === 'POST') {
     exit;
 }
 
-function renderHeader(string $title, int $cartCount, string $basePath): void
+function renderHeader(string $title, int $cartCount, string $basePath, string $assetBasePath): void
 {
     echo "<!doctype html>\n";
     echo "<html lang=\"fr\">\n";
@@ -417,7 +424,7 @@ function renderHeader(string $title, int $cartCount, string $basePath): void
     echo "<meta charset=\"utf-8\">\n";
     echo "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n";
     echo "<title>" . e($title) . "</title>\n";
-    echo "<link rel=\"stylesheet\" href=\"" . e(withBasePath('/assets/style.css', $basePath)) . "\">\n";
+    echo "<link rel=\"stylesheet\" href=\"" . e(withBasePath('/assets/style.css', $assetBasePath)) . "\">\n";
     echo "</head>\n";
     echo "<body>\n";
     echo "<header>\n";
@@ -431,10 +438,10 @@ function renderHeader(string $title, int $cartCount, string $basePath): void
     echo "</header>\n";
 }
 
-function renderFooter(string $basePath): void
+function renderFooter(string $basePath, string $assetBasePath): void
 {
     echo "<footer>meneetocom - Cartes & Tags NFC dynamiques</footer>\n";
-    echo "<script src=\"" . e(withBasePath('/assets/app.js', $basePath)) . "\"></script>\n";
+    echo "<script src=\"" . e(withBasePath('/assets/app.js', $assetBasePath)) . "\"></script>\n";
     echo "</body>\n</html>";
 }
 
@@ -617,7 +624,7 @@ function renderCartModal(array $cartItems, int $subtotal, array $wilayas, string
 
 if ($path === $basePath . '/admin') {
     $cartCount = getCartCount($cart);
-    renderHeader('Admin - meneetocom', $cartCount, $basePath);
+    renderHeader('Admin - meneetocom', $cartCount, $basePath, $assetBasePath);
 
     if (empty($_SESSION['admin_logged_in'])) {
         $error = getFlash('error');
@@ -634,7 +641,7 @@ if ($path === $basePath . '/admin') {
         echo "</form>\n";
         echo "</div>\n";
         echo "</main>\n";
-        renderFooter($basePath);
+        renderFooter($basePath, $assetBasePath);
         exit;
     }
 
@@ -801,7 +808,7 @@ if ($path === $basePath . '/admin') {
 
     [$cartItems, $subtotal] = buildCartItems($cart, $products);
     renderCartModal($cartItems, $subtotal, $wilayas, $basePath);
-    renderFooter($basePath);
+    renderFooter($basePath, $assetBasePath);
     exit;
 }
 
@@ -820,7 +827,7 @@ if ($path === $basePath . '/product') {
     }
 
     $cartCount = getCartCount($cart);
-    renderHeader($product['title'] . ' - meneetocom', $cartCount, $basePath);
+    renderHeader($product['title'] . ' - meneetocom', $cartCount, $basePath, $assetBasePath);
 
     echo "<main class=\"container\" style=\"padding:2rem 0\">\n";
     echo "<a href=\"" . e(withBasePath('/', $basePath)) . "\" class=\"badge\">← Retour</a>\n";
@@ -873,12 +880,12 @@ if ($path === $basePath . '/product') {
     echo "</main>\n";
     [$cartItems, $subtotal] = buildCartItems($cart, $products);
     renderCartModal($cartItems, $subtotal, $wilayas, $basePath);
-    renderFooter($basePath);
+    renderFooter($basePath, $assetBasePath);
     exit;
 }
 
 $cartCount = getCartCount($cart);
-renderHeader('meneetocom - Boutique NFC', $cartCount, $basePath);
+renderHeader('meneetocom - Boutique NFC', $cartCount, $basePath, $assetBasePath);
 
 $flashSuccess = getFlash('success');
 $flashError = getFlash('error');
@@ -951,4 +958,4 @@ usort($products, static function (array $a, array $b): int {
 
 <?php renderCartModal($cartItems, $subtotal, $wilayas, $basePath); ?>
 
-<?php renderFooter($basePath); ?>
+<?php renderFooter($basePath, $assetBasePath); ?>
