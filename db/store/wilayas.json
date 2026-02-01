@@ -1,0 +1,408 @@
+[
+  {
+    "IDWilaya": 1,
+    "Wilaya": "Adrar",
+    "Domicile": "1400",
+    "Stopdesk": "970",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 2,
+    "Wilaya": "Chlef",
+    "Domicile": "750",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 3,
+    "Wilaya": "Laghouat",
+    "Domicile": "950",
+    "Stopdesk": "670",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 4,
+    "Wilaya": "Oum El Bouaghi",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 5,
+    "Wilaya": "Batna",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 6,
+    "Wilaya": "Bejaia",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 7,
+    "Wilaya": "Biskra",
+    "Domicile": "950",
+    "Stopdesk": "670",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 8,
+    "Wilaya": "Bechar",
+    "Domicile": "1050",
+    "Stopdesk": "720",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 9,
+    "Wilaya": "Blida",
+    "Domicile": "750",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 10,
+    "Wilaya": "Bouira",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 11,
+    "Wilaya": "Tamanrasset",
+    "Domicile": "1600",
+    "Stopdesk": "1120",
+    "Annuler": "250"
+  },
+  {
+    "IDWilaya": 12,
+    "Wilaya": "Tebessa",
+    "Domicile": "850",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 13,
+    "Wilaya": "Tlemcen",
+    "Domicile": "700",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 14,
+    "Wilaya": "Tiaret",
+    "Domicile": "750",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 15,
+    "Wilaya": "Tizi Ouzou",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 16,
+    "Wilaya": "Alger",
+    "Domicile": "650",
+    "Stopdesk": "470",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 17,
+    "Wilaya": "Djelfa",
+    "Domicile": "950",
+    "Stopdesk": "670",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 18,
+    "Wilaya": "Jijel",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 19,
+    "Wilaya": "S\u00e9tif",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 20,
+    "Wilaya": "Saida",
+    "Domicile": "750",
+    "Stopdesk": "570",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 21,
+    "Wilaya": "Skikda",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 22,
+    "Wilaya": "Sidi Bel Abb\u00e8s",
+    "Domicile": "700",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 23,
+    "Wilaya": "Annaba",
+    "Domicile": "850",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 24,
+    "Wilaya": "Guelma",
+    "Domicile": "850",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 25,
+    "Wilaya": "Constantine",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 26,
+    "Wilaya": "Medea",
+    "Domicile": "750",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 27,
+    "Wilaya": "Mostaganem",
+    "Domicile": "700",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 28,
+    "Wilaya": "M'Sila",
+    "Domicile": "900",
+    "Stopdesk": "570",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 29,
+    "Wilaya": "Mascara",
+    "Domicile": "700",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 30,
+    "Wilaya": "Ouargla",
+    "Domicile": "950",
+    "Stopdesk": "720",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 31,
+    "Wilaya": "Oran",
+    "Domicile": "400",
+    "Stopdesk": "370",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 32,
+    "Wilaya": "El Bayadh",
+    "Domicile": "1000",
+    "Stopdesk": "670",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 33,
+    "Wilaya": "Illizi",
+    "Domicile": "0",
+    "Stopdesk": "0",
+    "Annuler": "0"
+  },
+  {
+    "IDWilaya": 34,
+    "Wilaya": "Bordj Bou Arreridj",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 35,
+    "Wilaya": "Boumerdes",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 36,
+    "Wilaya": "El Tarf",
+    "Domicile": "850",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 37,
+    "Wilaya": "Tindouf",
+    "Domicile": "0",
+    "Stopdesk": "0",
+    "Annuler": "0"
+  },
+  {
+    "IDWilaya": 38,
+    "Wilaya": "Tissemsilt",
+    "Domicile": "750",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 39,
+    "Wilaya": "El Oued",
+    "Domicile": "950",
+    "Stopdesk": "720",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 40,
+    "Wilaya": "Khenchela",
+    "Domicile": "800",
+    "Stopdesk": "0",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 41,
+    "Wilaya": "Souk Ahras",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 42,
+    "Wilaya": "Tipaza",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 43,
+    "Wilaya": "Mila",
+    "Domicile": "800",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 44,
+    "Wilaya": "Ain Defla",
+    "Domicile": "750",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 45,
+    "Wilaya": "Naama",
+    "Domicile": "1000",
+    "Stopdesk": "670",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 46,
+    "Wilaya": "Ain Temouchent",
+    "Domicile": "650",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 47,
+    "Wilaya": "Ghardaia",
+    "Domicile": "950",
+    "Stopdesk": "670",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 48,
+    "Wilaya": "Relizane",
+    "Domicile": "750",
+    "Stopdesk": "520",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 49,
+    "Wilaya": "Timimoun",
+    "Domicile": "1400",
+    "Stopdesk": "0",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 50,
+    "Wilaya": "Bordj Badji Mokhtar",
+    "Domicile": "0",
+    "Stopdesk": "0",
+    "Annuler": "0"
+  },
+  {
+    "IDWilaya": 51,
+    "Wilaya": "Ouled Djellal",
+    "Domicile": "950",
+    "Stopdesk": "670",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 52,
+    "Wilaya": "B\u00e9ni Abb\u00e8s",
+    "Domicile": "1050",
+    "Stopdesk": "970",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 53,
+    "Wilaya": "In Salah",
+    "Domicile": "1600",
+    "Stopdesk": "0",
+    "Annuler": "250"
+  },
+  {
+    "IDWilaya": 54,
+    "Wilaya": "In Guezzam",
+    "Domicile": "1600",
+    "Stopdesk": "0",
+    "Annuler": "250"
+  },
+  {
+    "IDWilaya": 55,
+    "Wilaya": "Touggourt",
+    "Domicile": "950",
+    "Stopdesk": "720",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 56,
+    "Wilaya": "Djanet",
+    "Domicile": "0",
+    "Stopdesk": "0",
+    "Annuler": "0"
+  },
+  {
+    "IDWilaya": 57,
+    "Wilaya": "M'Ghair",
+    "Domicile": "950",
+    "Stopdesk": "0",
+    "Annuler": "200"
+  },
+  {
+    "IDWilaya": 58,
+    "Wilaya": "Meniaa",
+    "Domicile": "950",
+    "Stopdesk": "0",
+    "Annuler": "200"
+  }
+]
