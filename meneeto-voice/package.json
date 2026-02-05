@@ -1,0 +1,27 @@
+{
+  "name": "meneeto-voice",
+  "version": "1.0.0",
+  "description": "Meneeto Voice - Gemini AI text-to-audio app with JSON storage and cPanel-ready startup",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js"
+  },
+  "keywords": [
+    "AI",
+    "voice",
+    "darja",
+    "daridja",
+    "algerian",
+    "algerien",
+    "gemini",
+    "text-to-speech",
+    "meneeto"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
+  }
+}

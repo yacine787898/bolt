@@ -1,0 +1,18 @@
+[
+  {
+    "id": "darja-friendly",
+    "label": "Darja Friendly",
+    "prompt": "Warm Algerian darja voice, natural cadence, expressive and clear pronunciation",
+    "active": true,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "studio-pro",
+    "label": "Studio Pro",
+    "prompt": "Professional studio narrator voice, smooth, confident, modern AI ad tone",
+    "active": true,
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "updatedAt": "2026-01-01T00:00:00.000Z"
+  }
+]

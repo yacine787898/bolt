@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meneeto Voice | AI Voice Darja Algerian Text to Audio</title>
+    <meta name="description" content="Meneeto Voice transforme vos textes en audio naturel avec l'IA Gemini. Voix darja, daridja, algerian et styles personnalisés." />
+    <meta name="keywords" content="AI, VOIX, darja, daridja, algerian, algerien, text to speech, Gemini, Meneeto Voice" />
+    <meta name="robots" content="index, follow" />
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Meneeto Voice</h1>
+      <p class="subtitle">AI Voice Studio • Darja • Daridja • Algerian • Algerien</p>
+
+      <form id="generateForm" class="card">
+        <label>Clé d'accès</label>
+        <input id="accessKey" required placeholder="Entrez votre clé d'accès" />
+
+        <label>Modèle de voix</label>
+        <select id="voiceModel" required></select>
+
+        <label>Texte</label>
+        <textarea id="text" maxlength="500" required placeholder="Entrez votre texte (500 caractères max)"></textarea>
+        <div class="counter"><span id="count">0</span>/500</div>
+
+        <button type="submit" class="btn">Générer l'audio</button>
+      </form>
+
+      <section id="result" class="card hidden">
+        <h2>Résultat Audio</h2>
+        <audio id="audioPlayer" controls></audio>
+        <p id="remainingTokens"></p>
+      </section>
+
+      <div class="actions">
+        <button class="btn secondary" id="buyBtn">Acheter / Recharger une clé</button>
+        <button class="btn ghost" id="checkBtn">Vérifier mes jetons</button>
+      </div>
+    </main>
+
+    <div id="pricingModal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Pricing Meneeto Voice</h3>
+        <p>Plan Start: 100 jetons • Plan Pro: 500 jetons • Plan Ultra: 2000 jetons</p>
+        <p>Contactez votre équipe commerciale pour paiement/recharge.</p>
+        <button class="btn" data-close="pricingModal">Fermer</button>
+      </div>
+    </div>
+
+    <div id="checkModal" class="modal hidden">
+      <div class="modal-content">
+        <h3>Consulter une clé</h3>
+        <input id="checkKeyInput" placeholder="Entrer la clé d'accès" />
+        <button class="btn" id="checkKeyBtn">Vérifier</button>
+        <p id="keyInfo"></p>
+        <button class="btn secondary hidden" id="buyFromCheck">Acheter/Recharger</button>
+        <button class="btn" data-close="checkModal">Fermer</button>
+      </div>
+    </div>
+
+    <script src="/assets/client.js"></script>
+  </body>
+</html>
