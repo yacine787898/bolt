@@ -10,6 +10,7 @@ require __DIR__ . '/../src/Controller/BaseController.php';
 require __DIR__ . '/../src/Controller/ClientController.php';
 require __DIR__ . '/../src/Controller/RestaurantController.php';
 require __DIR__ . '/../src/Controller/AdminController.php';
+require __DIR__ . '/../src/Controller/AgencyController.php';
 require __DIR__ . '/../src/Repository/SettingsRepository.php';
 require __DIR__ . '/../src/Repository/RestaurantRepository.php';
 require __DIR__ . '/../src/Repository/UserRepository.php';
@@ -22,8 +23,18 @@ $db = new Database($config);
 $router = new Router();
 
 $router->get('/', function () use ($db, $config): void {
-    $controller = new ClientController($db, $config);
-    $controller->index();
+    $controller = new AgencyController($db, $config);
+    $controller->home();
+});
+
+$router->post('/contact', function () use ($db, $config): void {
+    $controller = new AgencyController($db, $config);
+    $controller->submitContact();
+});
+
+$router->get('/admin/messages-portal-7f9a', function () use ($db, $config): void {
+    $controller = new AgencyController($db, $config);
+    $controller->adminMessages();
 });
 
 $router->get('/restaurant', function () use ($db, $config): void {
