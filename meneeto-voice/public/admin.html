@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | Meneeto Voice</title>
+    <link rel="stylesheet" href="/assets/style.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1>Admin Meneeto Voice</h1>
+
+      <section id="adminLogin" class="card">
+        <h2>Connexion</h2>
+        <input id="adminPassword" type="password" placeholder="Mot de passe admin" />
+        <label>Vérification humaine: 1 + ? = 9</label>
+        <input id="humanCheck" placeholder="Votre réponse" />
+        <button class="btn" id="loginBtn">Se connecter</button>
+        <p id="loginMsg"></p>
+      </section>
+
+      <section id="adminPanel" class="hidden">
+        <div class="card">
+          <h2>Statistiques</h2>
+          <p id="stats"></p>
+        </div>
+
+        <div class="card">
+          <h2>Configuration Gemini</h2>
+          <input id="geminiApiKey" placeholder="Gemini API Key" />
+          <input id="geminiModel" placeholder="Nom du modèle Gemini" />
+          <button class="btn" id="saveSettings">Enregistrer</button>
+        </div>
+
+        <div class="card">
+          <h2>Modèles de voix</h2>
+          <input id="modelLabel" placeholder="Nom visible du modèle" />
+          <textarea id="modelPrompt" placeholder="Prompt de style (invisible côté utilisateur)"></textarea>
+          <button class="btn" id="addModel">Ajouter modèle</button>
+          <div id="modelsList"></div>
+        </div>
+
+        <div class="card">
+          <h2>Clés d'accès</h2>
+          <input id="keyUses" type="number" placeholder="Jetons initiaux" />
+          <input id="keyExpiry" type="datetime-local" />
+          <button class="btn" id="addKey">Créer clé</button>
+          <div id="keysList"></div>
+        </div>
+      </section>
+    </main>
+
+    <script src="/assets/admin.js"></script>
+  </body>
+</html>
